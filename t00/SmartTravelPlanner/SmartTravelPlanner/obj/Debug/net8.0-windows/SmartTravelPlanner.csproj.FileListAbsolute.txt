@@ -1,0 +1,16 @@
+C:\Users\asus2\Desktop\Innovation_Campus\Mission-Control\t00\SmartTravelPlanner\SmartTravelPlanner\bin\Debug\net8.0-windows\SmartTravelPlanner.exe
+C:\Users\asus2\Desktop\Innovation_Campus\Mission-Control\t00\SmartTravelPlanner\SmartTravelPlanner\bin\Debug\net8.0-windows\SmartTravelPlanner.deps.json
+C:\Users\asus2\Desktop\Innovation_Campus\Mission-Control\t00\SmartTravelPlanner\SmartTravelPlanner\bin\Debug\net8.0-windows\SmartTravelPlanner.runtimeconfig.json
+C:\Users\asus2\Desktop\Innovation_Campus\Mission-Control\t00\SmartTravelPlanner\SmartTravelPlanner\bin\Debug\net8.0-windows\SmartTravelPlanner.dll
+C:\Users\asus2\Desktop\Innovation_Campus\Mission-Control\t00\SmartTravelPlanner\SmartTravelPlanner\bin\Debug\net8.0-windows\SmartTravelPlanner.pdb
+C:\Users\asus2\Desktop\Innovation_Campus\Mission-Control\t00\SmartTravelPlanner\SmartTravelPlanner\obj\Debug\net8.0-windows\SmartTravelPlanner.csproj.GenerateResource.cache
+C:\Users\asus2\Desktop\Innovation_Campus\Mission-Control\t00\SmartTravelPlanner\SmartTravelPlanner\obj\Debug\net8.0-windows\SmartTravelPlanner.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\asus2\Desktop\Innovation_Campus\Mission-Control\t00\SmartTravelPlanner\SmartTravelPlanner\obj\Debug\net8.0-windows\SmartTravelPlanner.AssemblyInfoInputs.cache
+C:\Users\asus2\Desktop\Innovation_Campus\Mission-Control\t00\SmartTravelPlanner\SmartTravelPlanner\obj\Debug\net8.0-windows\SmartTravelPlanner.AssemblyInfo.cs
+C:\Users\asus2\Desktop\Innovation_Campus\Mission-Control\t00\SmartTravelPlanner\SmartTravelPlanner\obj\Debug\net8.0-windows\SmartTravelPlanner.csproj.CoreCompileInputs.cache
+C:\Users\asus2\Desktop\Innovation_Campus\Mission-Control\t00\SmartTravelPlanner\SmartTravelPlanner\obj\Debug\net8.0-windows\SmartTravelPlanner.dll
+C:\Users\asus2\Desktop\Innovation_Campus\Mission-Control\t00\SmartTravelPlanner\SmartTravelPlanner\obj\Debug\net8.0-windows\refint\SmartTravelPlanner.dll
+C:\Users\asus2\Desktop\Innovation_Campus\Mission-Control\t00\SmartTravelPlanner\SmartTravelPlanner\obj\Debug\net8.0-windows\SmartTravelPlanner.pdb
+C:\Users\asus2\Desktop\Innovation_Campus\Mission-Control\t00\SmartTravelPlanner\SmartTravelPlanner\obj\Debug\net8.0-windows\SmartTravelPlanner.genruntimeconfig.cache
+C:\Users\asus2\Desktop\Innovation_Campus\Mission-Control\t00\SmartTravelPlanner\SmartTravelPlanner\obj\Debug\net8.0-windows\ref\SmartTravelPlanner.dll
+C:\Users\asus2\Desktop\Innovation_Campus\Mission-Control\t00\SmartTravelPlanner\SmartTravelPlanner\obj\Debug\net8.0-windows\SmartTravelPlanner.SmartTravelPlanner.resources
