@@ -60,13 +60,77 @@ namespace Travelling {
             adjacencyList[from].Add(new Edge(to, distance));
         }
 
+        public void AddCityConnection(string cityA, string cityB, int distance)
+        {
+            if (string.IsNullOrEmpty(cityA) || string.IsNullOrEmpty(cityB))
+            {
+                throw new ArgumentException("City names cannot be empty");
+            }
+
+            if (distance <= 0)
+            {
+                throw new ArgumentException("Distance must be positive");
+            }
+
+            edges.Add((cityA, cityB, distance));
+            AddConnection(cityA, cityB, distance);
+            AddConnection(cityB, cityA, distance);
+        }
+
+        public bool RemoveConnection(string cityA, string cityB)
+        {
+            if (string.IsNullOrEmpty(cityA) || string.IsNullOrEmpty(cityB))
+            {
+                return false;
+            }
+
+            bool removed = false;
+            for (int i = edges.Count - 1; i >= 0; i--)
+            {
+                if ((edges[i].A == cityA && edges[i].B == cityB) ||
+                    (edges[i].A == cityB && edges[i].B == cityA))
+                {
+                    edges.RemoveAt(i);
+                    removed = true;
+                }
+            }
+
+            if (removed)
+            {
+                if (adjacencyList.ContainsKey(cityA))
+                {
+                    adjacencyList[cityA].RemoveAll(e => e.City == cityB);
+                }
+                if (adjacencyList.ContainsKey(cityB))
+                {
+                    adjacencyList[cityB].RemoveAll(e => e.City == cityA);
+                }
+            }
+
+            return removed;
+        }
+
+        public List<string> GetAllCities()
+        {
+            return new List<string>(adjacencyList.Keys);
+        }
+
         public List<string> FindShortestPath(string from, string to)
         {
+            if (!adjacencyList.ContainsKey(from) || !adjacencyList.ContainsKey(to))
+            {
+                return null;
+            }
+
+            if (from == to)
+            {
+                return new List<string> { from };
+            }
 
             Dictionary <string, int> distance = new Dictionary<string, int>(); 
 
             foreach (string city in adjacencyList.Keys)
-                distance[city] = 2000000000;
+                distance[city] = int.MaxValue;
             distance[from] = 0;
 
             var previous = new Dictionary<string, string>();
@@ -102,10 +166,16 @@ namespace Travelling {
                         break;
                     }
 
+                if (!adjacencyList.ContainsKey(current))
+                    continue;
+
                 foreach (var edge in adjacencyList[current]) 
                 {
                     var neighbour = edge.City;
                     
+                    if (!distance.ContainsKey(neighbour))
+                        continue;
+
                     int newDistance = distance[current] + edge.Distance;
 
                     if (newDistance < distance[neighbour])
@@ -119,13 +189,24 @@ namespace Travelling {
 
             }
 
+            if (previous[to] == null && from != to)
+            {
+                return null;
+            }
+
             List<string> path = new List<string>();
             current = to;
-            while (current != from)
+            while (current != null && current != from)
             {
                 path.Insert(0, current);
                 current = previous[current];
             }
+            
+            if (current == null)
+            {
+                return null;
+            }
+            
             path.Insert(0, from);
             return path;
         }

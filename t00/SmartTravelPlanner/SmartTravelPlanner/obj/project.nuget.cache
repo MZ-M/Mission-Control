@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "IrC2IsHRoz0=",
+  "dgSpecHash": "ZMCAzGGWpX8=",
   "success": true,
   "projectFilePath": "C:\\Users\\asus2\\Desktop\\Innovation_Campus\\Mission-Control\\t00\\SmartTravelPlanner\\SmartTravelPlanner\\SmartTravelPlanner.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\asus2\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512"
+  ],
   "logs": []
 }

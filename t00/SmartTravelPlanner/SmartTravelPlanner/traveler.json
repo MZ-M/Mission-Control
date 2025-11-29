@@ -1,0 +1,11 @@
+{
+  "name": "Alice",
+  "currentLocation": "Warsaw",
+  "route": [
+    "Odesa",
+    "Kyiv",
+    "Cheb",
+    "Lugansk",
+    "Warsaw"
+  ]
+}
