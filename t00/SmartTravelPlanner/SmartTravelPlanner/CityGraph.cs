@@ -115,7 +115,7 @@ namespace Travelling {
             return new List<string>(adjacencyList.Keys);
         }
 
-        public List<string> FindShortestPath(string from, string to)
+        public List<string>? FindShortestPath(string from, string to)
         {
             if (!adjacencyList.ContainsKey(from) || !adjacencyList.ContainsKey(to))
             {
@@ -133,7 +133,7 @@ namespace Travelling {
                 distance[city] = int.MaxValue;
             distance[from] = 0;
 
-            var previous = new Dictionary<string, string>();
+            var previous = new Dictionary<string, string?>();
 
             foreach (string city in adjacencyList.Keys)
                 previous[city] = null;
@@ -143,7 +143,7 @@ namespace Travelling {
             foreach (string city in adjacencyList.Keys)
                 unvisited.Add(city);
  
-            string current; 
+            string? current; 
 
             while (unvisited.Count != 0)
             {
@@ -202,7 +202,7 @@ namespace Travelling {
                 current = previous[current];
             }
             
-            if (current == null)
+            if (current == null || current != from)
             {
                 return null;
             }

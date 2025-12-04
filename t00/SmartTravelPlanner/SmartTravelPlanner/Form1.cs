@@ -1,5 +1,7 @@
 using System;
+using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.Windows.Forms;
 using Travelling;
 
@@ -20,18 +22,18 @@ namespace SmartTravelPlanner
         private void ApplyModernStyling()
         {
             // Modern color scheme
-            Color primaryColor = Color.FromArgb(0, 120, 215); // Modern blue
-            Color secondaryColor = Color.FromArgb(108, 117, 125); // Modern gray
-            Color successColor = Color.FromArgb(40, 167, 69); // Modern green
-            Color dangerColor = Color.FromArgb(220, 53, 69); // Modern red
-            Color backgroundColor = Color.FromArgb(248, 249, 250); // Light gray background
+            Color primaryColor = Color.FromArgb(0, 120, 215); 
+            Color secondaryColor = Color.FromArgb(108, 117, 125); 
+            Color successColor = Color.FromArgb(40, 167, 69); 
+            Color dangerColor = Color.FromArgb(220, 53, 69); 
+            Color backgroundColor = Color.FromArgb(248, 249, 250); 
             Color panelColor = Color.White;
 
-            // Form styling
+            //styling
             this.BackColor = backgroundColor;
             this.Font = new Font("Segoe UI", 9F, FontStyle.Regular);
 
-            // Group boxes - modern white panels
+            // Group box
             foreach (Control control in this.Controls)
             {
                 if (control is GroupBox groupBox)
@@ -42,7 +44,7 @@ namespace SmartTravelPlanner
                 }
             }
 
-            // Primary action buttons (Create, Plan Route, Load Map)
+            //Create, Plan Route, Load Map
             btnCreateTraveler.BackColor = primaryColor;
             btnCreateTraveler.ForeColor = Color.White;
             btnCreateTraveler.FlatStyle = FlatStyle.Flat;
@@ -64,7 +66,7 @@ namespace SmartTravelPlanner
             btnLoadMap.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             btnLoadMap.Cursor = Cursors.Hand;
 
-            // Secondary action buttons (Save, Load Traveler)
+            //Save, Load Traveler
             btnSaveTraveler.BackColor = successColor;
             btnSaveTraveler.ForeColor = Color.White;
             btnSaveTraveler.FlatStyle = FlatStyle.Flat;
@@ -79,7 +81,7 @@ namespace SmartTravelPlanner
             btnLoadTraveler.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             btnLoadTraveler.Cursor = Cursors.Hand;
 
-            // Tertiary button (Clear Route)
+            //Clear Route
             btnClearRoute.BackColor = secondaryColor;
             btnClearRoute.ForeColor = Color.White;
             btnClearRoute.FlatStyle = FlatStyle.Flat;
@@ -87,7 +89,7 @@ namespace SmartTravelPlanner
             btnClearRoute.Font = new Font("Segoe UI", 9F, FontStyle.Regular);
             btnClearRoute.Cursor = Cursors.Hand;
 
-            // Danger button (Exit)
+            // Exit
             btnExit.BackColor = dangerColor;
             btnExit.ForeColor = Color.White;
             btnExit.FlatStyle = FlatStyle.Flat;
@@ -95,19 +97,19 @@ namespace SmartTravelPlanner
             btnExit.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             btnExit.Cursor = Cursors.Hand;
 
-            // Text boxes - modern styling
+            // Text box
             foreach (Control control in this.Controls)
             {
                 ApplyTextBoxStyling(control);
             }
 
-            // Labels - modern font
+            // Label
             foreach (Control control in this.Controls)
             {
                 ApplyLabelStyling(control);
             }
 
-            // ListBox - modern styling
+            // ListBox
             lstRoute.BackColor = Color.White;
             lstRoute.BorderStyle = BorderStyle.FixedSingle;
             lstRoute.Font = new Font("Segoe UI", 9F, FontStyle.Regular);
@@ -173,7 +175,7 @@ namespace SmartTravelPlanner
 
                 if (string.IsNullOrEmpty(name) || string.IsNullOrEmpty(location))
                 {
-                    MessageBox.Show("Traveler name and current location must not be empty.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Traveler field empty", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
 
@@ -208,15 +210,15 @@ namespace SmartTravelPlanner
             }
             catch (FileNotFoundException)
             {
-                MessageBox.Show("Map file not found or has invalid format.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Map file not found or invalid format", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (FormatException)
             {
-                MessageBox.Show("Map file not found or has invalid format.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Map file not found or invalid format", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                MessageBox.Show("Map file not found or has invalid format.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Map file not found or invalid format", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -239,7 +241,20 @@ namespace SmartTravelPlanner
                 string destination = txtDestination.Text.Trim();
                 if (string.IsNullOrEmpty(destination))
                 {
-                    MessageBox.Show("Traveler name, current location, and destination must not be empty.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Destination field empty", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                // Check if destination is in map
+                var allCities = cityGraph.GetAllCities();
+                string normalizedDestination = destination[0].ToString().ToUpper() + destination.Substring(1).ToLower();
+                bool destinationInMap = allCities.Any(c => c.Equals(normalizedDestination, StringComparison.OrdinalIgnoreCase));
+                
+                if (!destinationInMap)
+                {
+                    MessageBox.Show("Destination not in map", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    lstRoute.Items.Clear();
+                    lblTotalDistanceValue.Text = "0 km";
                     return;
                 }
 
@@ -247,7 +262,7 @@ namespace SmartTravelPlanner
                 
                 if (!success)
                 {
-                    MessageBox.Show("Destination not reachable or not in map.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Destination not reachable", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     lstRoute.Items.Clear();
                     lblTotalDistanceValue.Text = "0 km";
                     return;
@@ -316,7 +331,7 @@ namespace SmartTravelPlanner
             {
                 MessageBox.Show("Error saving traveler file.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 MessageBox.Show("Error saving traveler file.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -367,9 +382,9 @@ namespace SmartTravelPlanner
             }
             catch (FileLoadException)
             {
-                MessageBox.Show("Invalid .json file during loading.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Invalid .json file during loading", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 MessageBox.Show("Invalid traveler file. Please select a valid .json file.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }

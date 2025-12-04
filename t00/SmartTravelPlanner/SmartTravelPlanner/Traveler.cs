@@ -31,6 +31,11 @@ namespace Travelling
 
         public void SetLocation(string location)
         {
+            if (string.IsNullOrEmpty(location))
+            {
+                this.currentLocation = "";
+                return;
+            }
             this.currentLocation = location[0].ToString().ToUpper() + location.Substring(1).ToLower();
         }
         public string GetLocation() => currentLocation;
@@ -83,7 +88,7 @@ namespace Travelling
 
         public bool RemoveCity(string city) => route.Remove(city);
 
-        public string GetNextStop()
+        public string? GetNextStop()
         {
             if (route.Count == 0)
             {
@@ -202,19 +207,24 @@ namespace Travelling
             return true;
         }
 
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
             if (ReferenceEquals(this, obj))
             {
                 return true;
             }
 
-            if (ReferenceEquals(obj, null))
+            if (obj is not Traveler other)
             {
                 return false;
             }
 
-            throw new NotImplementedException();
+            return name == other.name && currentLocation == other.currentLocation;
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(name, currentLocation);
         }
     }
 }
